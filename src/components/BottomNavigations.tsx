@@ -4,10 +4,12 @@ import TvIcon from "@mui/icons-material/Tv";
 import FindInPageIcon from "@mui/icons-material/FindInPage";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useAppSelector } from "../redux/hooks";
 
 function BottomNavigations() {
   const navigation = useNavigate();
   const [value, setValue] = useState(0);
+  const episodeNumber = useAppSelector((state) => state.episode.episodeNumber);
 
   return (
     <Paper
@@ -33,7 +35,7 @@ function BottomNavigations() {
           icon={<FindInPageIcon />}
         />
         <BottomNavigationAction
-          onClick={() => navigation("/tv/1")}
+          onClick={() => navigation(`/tv/${episodeNumber}`)}
           label="Details"
           icon={<TvIcon />}
         />

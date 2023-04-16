@@ -4,6 +4,8 @@ import App from "./App";
 import "./index.scss";
 import { BrowserRouter } from "react-router-dom";
 import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
+import { Provider } from "react-redux";
+import store from "./redux/store";
 
 const darkTheme = createTheme({
   palette: {
@@ -13,11 +15,13 @@ const darkTheme = createTheme({
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <ThemeProvider theme={darkTheme}>
-      <CssBaseline />
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider theme={darkTheme}>
+        <CssBaseline />
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </ThemeProvider>
+    </Provider>
   </React.StrictMode>
 );
