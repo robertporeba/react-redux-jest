@@ -3,39 +3,32 @@ import HomeIcon from "@mui/icons-material/Home";
 import TvIcon from "@mui/icons-material/Tv";
 import FindInPageIcon from "@mui/icons-material/FindInPage";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 import { useAppSelector } from "../redux/hooks";
 
 function BottomNavigations() {
   const navigation = useNavigate();
-  const [value, setValue] = useState(0);
+
   const episodeNumber = useAppSelector((state) => state.episode.episodeNumber);
+  const activeNavigationId = useAppSelector((state) => state.navigation.id);
 
   return (
     <Paper
       sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
       elevation={3}
     >
-      <BottomNavigation
-        value={value}
-        onChange={(_event, newValue) => {
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-          setValue(newValue);
-        }}
-        showLabels
-      >
+      <BottomNavigation value={activeNavigationId} showLabels>
         <BottomNavigationAction
           onClick={() => navigation("/")}
           label="Home"
           icon={<HomeIcon />}
         />
         <BottomNavigationAction
-          onClick={() => navigation("/tv")}
+          onClick={() => navigation("/list/1")}
           label="List"
           icon={<FindInPageIcon />}
         />
         <BottomNavigationAction
-          onClick={() => navigation(`/tv/${episodeNumber}`)}
+          onClick={() => navigation(`/episode/${episodeNumber}`)}
           label="Details"
           icon={<TvIcon />}
         />

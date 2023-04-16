@@ -2,12 +2,19 @@ import { Box } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { type IShow, getSingleEpisode } from "../services/shows.service";
+import { useAppDispatch } from "../redux/hooks";
+import { setActiveNavigation } from "../redux/navigationSlice";
 
 const htmlRemoveRegex = /(<([^>]+)>)/gi;
 
 function ShowDetails() {
   const { id } = useParams();
   const [episode, setEpisode] = useState<IShow>();
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(setActiveNavigation({ id: 2 }));
+  }, []);
 
   useEffect(() => {
     if (id !== undefined) {

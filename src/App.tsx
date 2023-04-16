@@ -11,8 +11,8 @@ function App() {
     <>
       <Routes>
         <Route path={"/"} element={<Home />} />
-        <Route path={"/tv"} element={<ShowsList />} />
-        <Route path={"/tv/:id"} element={<ShowDetails />} />
+        <Route path={"/list/:page"} element={<ShowsList />} />
+        <Route path={"/episode/:id"} element={<ShowDetails />} />
         <Route path={"*"} element={<Home />} />
       </Routes>
       <BottomNavigations />
