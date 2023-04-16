@@ -9,6 +9,8 @@ import {
 import { useEffect, useState } from "react";
 import { type IShow, getShows } from "../services/shows.service";
 import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../redux/hooks";
+import { setEpisode } from "../redux/episodeSlice";
 
 const style = {
   width: "100%",
@@ -17,6 +19,7 @@ const style = {
 function ShowsList() {
   const navigate = useNavigate();
   const [showsList, setShowsList] = useState<IShow[]>();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     void getShows(1).then((shows) => {
@@ -30,15 +33,17 @@ function ShowsList() {
       <List sx={style} component="nav" aria-label="mailbox folders">
         {showsList !== undefined ? (
           showsList.map((show) => (
-            <>
+            <Box key={show.id}>
               <ListItem
-                onClick={() => navigate(`/tv/${show.id}`)}
-                key={show.id}
+                onClick={() => {
+                  dispatch(setEpisode({ episodeNumber: show.id }));
+                  navigate(`/tv/${show.id}`);
+                }}
               >
                 <ListItemText primary={show.name} />
               </ListItem>
               <Divider />
-            </>
+            </Box>
           ))
         ) : (
           <></>

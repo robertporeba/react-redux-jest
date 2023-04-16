@@ -31,14 +31,12 @@ export interface IShow {
 
 const getShows = (pageNumber: number) => {
   return api.get<IShow[]>(`/shows/${pageNumber}/episodes`).then((response) => {
-    console.log(JSON.stringify(response.data));
     return Promise.resolve(response.data);
   });
 };
 
 const getSingleEpisode = (id: number) => {
   return api.get<IShow>(`/episodes/${id}`).then((response) => {
-    console.log(JSON.stringify(response.data));
     return Promise.resolve(response.data);
   });
 };
