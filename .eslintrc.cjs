@@ -37,6 +37,8 @@ module.exports = {
     'import/no-absolute-path': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/space-before-function-paren': 'off',
-    'react/react-in-jsx-scope': 'off'
+    'react/react-in-jsx-scope': 'off',
+    '@typescript-eslint/no-confusing-void-expression': 'off',
+    '@typescript-eslint/comma-dangle': 'off'
   }
 }
