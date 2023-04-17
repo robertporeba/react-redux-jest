@@ -27,19 +27,36 @@ function ShowDetails() {
   return (
     <>
       {episode !== undefined ? (
-        <Box paddingX={"5%"}>
-          <Box>Name: {episode.name}</Box>
-          <Box>Season: {episode.season}</Box>
-          <Box>Number: {episode.number}</Box>
-          <Box>Type: {episode.type}</Box>
-          <Box>Air date: {episode.airdate}</Box>
-          <Box>Air time: {episode.airtime}</Box>
-          <Box>Rating: {episode.rating.average}</Box>
-          <Box>Summary: {episode.summary.replace(htmlRemoveRegex, "")}</Box>
-          <img src={episode.image.original} alt={episode.name} loading="lazy" />
+        <Box data-testid={"show-details-box"} paddingX={"5%"}>
+          <Box data-testid={"show-details-name"}>Name: {episode.name}</Box>
+          <Box data-testid={"show-details-season"}>
+            Season: {episode.season}
+          </Box>
+          <Box data-testid={"show-details-number"}>
+            Number: {episode.number}
+          </Box>
+          <Box data-testid={"show-details-type"}>Type: {episode.type}</Box>
+          <Box data-testid={"show-details-airdate"}>
+            Air date: {episode.airdate}
+          </Box>
+          <Box data-testid={"show-details-airtime"}>
+            Air time: {episode.airtime}
+          </Box>
+          <Box data-testid={"show-details-rating"}>
+            Rating: {episode.rating.average}
+          </Box>
+          <Box data-testid={"show-details-summary"}>
+            Summary: {episode.summary.replace(htmlRemoveRegex, "")}
+          </Box>
+          <img
+            data-testid={"show-details-img"}
+            src={episode.image.original}
+            alt={episode.name}
+            loading="lazy"
+          />
         </Box>
       ) : (
-        <></>
+        <Box data-testid={"show-details-not-found"}></Box>
       )}
     </>
   );
