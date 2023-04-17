@@ -30,6 +30,7 @@ function Home() {
   return (
     <>
       <TextField
+        data-testid={"search-input"}
         onChange={(e) => setSearchParams({ q: e.target.value })}
         value={searchString}
         id="filled-basic"
@@ -37,23 +38,38 @@ function Home() {
         variant="outlined"
       />
       {show !== undefined && show !== null ? (
-        <Box paddingX={"5%"}>
-          <Box>Name: {show.name}</Box>
-          <Box>Language: {show.language}</Box>
-          <Box>Genres: {show.genres.map((g) => g)}</Box>
-          <Box>Type: {show.type}</Box>
-          <Box>Status: {show.status}</Box>
-          <Box>Premiered: {show.premiered}</Box>
-          <Box>Ended: {show.ended}</Box>
-          <Box>Rating: {show.rating.average}</Box>
-          <Box>Summary: {show.summary?.replace(htmlRemoveRegex, "")}</Box>
-          <img src={show.image?.original} alt={show.name} loading="lazy" />
-          <Link target={"_blank"} to={show.url}>
+        <Box data-testid={"home-data-box"} paddingX={"5%"}>
+          <Box data-testid={"home-data-name"}>Name: {show.name}</Box>
+          <Box data-testid={"home-data-language"}>
+            Language: {show.language}
+          </Box>
+          <Box data-testid={"home-data-genred"}>
+            Genres: {show.genres.map((g) => g)}
+          </Box>
+          <Box data-testid={"home-data-type"}>Type: {show.type}</Box>
+          <Box data-testid={"home-data-status"}>Status: {show.status}</Box>
+          <Box data-testid={"home-data-premiered"}>
+            Premiered: {show.premiered}
+          </Box>
+          <Box data-testid={"home-data-ended"}>Ended: {show.ended}</Box>
+          <Box data-testid={"home-data-rating"}>
+            Rating: {show.rating.average}
+          </Box>
+          <Box data-testid={"home-data-summary"}>
+            Summary: {show.summary?.replace(htmlRemoveRegex, "")}
+          </Box>
+          <img
+            data-testid={"home-data-image"}
+            src={show.image?.original}
+            alt={show.name}
+            loading="lazy"
+          />
+          <Link data-testid={"home-data-url"} target={"_blank"} to={show.url}>
             Url
           </Link>
         </Box>
       ) : (
-        <Box>Not Found</Box>
+        <Box data-testid={"home-data-not-found"}>Not Found</Box>
       )}
     </>
   );
