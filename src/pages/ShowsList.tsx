@@ -30,13 +30,7 @@ function ShowsList() {
   useEffect(() => {
     if (page !== undefined) {
       void getShows(parseInt(page)).then((shows) => {
-        setShowsList((prevState) => {
-          if (JSON.stringify(prevState) !== JSON.stringify(shows)) {
-            return [...prevState, ...shows];
-          } else {
-            return [...prevState];
-          }
-        });
+        setShowsList((prevState) => [...prevState, ...shows]);
       });
     }
   }, [page]);
