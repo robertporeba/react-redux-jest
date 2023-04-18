@@ -100,7 +100,8 @@ const getShowsBySearch = (searchString: string) => {
     .get<ISearchShow>(`/singlesearch/shows?q=${searchString}`)
     .then((response) => {
       return Promise.resolve(response.data);
-    });
+    })
+    .catch((e) => Promise.reject(e));
 };
 
 export { getShows, getSingleEpisode, getShowsBySearch };
