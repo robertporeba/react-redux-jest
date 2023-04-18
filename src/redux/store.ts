@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import episodeReducer from "./episodeSlice";
 import navigationReducer from "./navigationSlice";
+import showReducer from "./showSlice";
 
 const store = configureStore({
   reducer: {
     episode: episodeReducer,
     navigation: navigationReducer,
+    show: showReducer,
   },
 });
 

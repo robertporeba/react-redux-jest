@@ -1,9 +1,11 @@
 import { Box, TextField } from "@mui/material";
-import { useAppDispatch } from "../redux/hooks";
-import { useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { useEffect } from "react";
 import { setActiveNavigation } from "../redux/navigationSlice";
 import { Link, useSearchParams } from "react-router-dom";
-import { type ISearchShow, getShowsBySearch } from "../services/shows.service";
+import { getShowsBySearch } from "../services/shows.service";
+import { setShow } from "../redux/showSlice";
+import useDebounce from "../hooks/useDebounde";
 
 const htmlRemoveRegex = /(<([^>]+)>)/gi;
 
@@ -11,7 +13,13 @@ function Home() {
   const dispatch = useAppDispatch();
   const [searchParams, setSearchParams] = useSearchParams({ q: "" });
   const searchString = searchParams.get("q");
-  const [show, setShow] = useState<ISearchShow | null>(null);
+
+  const debouncedValue = useDebounce<string>(
+    searchString !== null ? searchString : "",
+    1000
+  );
+
+  const show = useAppSelector((state) => state.show.showDetails);
 
   useEffect(() => {
     dispatch(setActiveNavigation({ id: 0 }));
@@ -21,11 +29,13 @@ function Home() {
     if (searchString !== null && searchString.length > 0) {
       void getShowsBySearch(searchString)
         .then((searchShow) => {
-          setShow(searchShow);
+          dispatch(setShow({ show: searchShow }));
         })
-        .catch(() => setShow(null));
+        .catch((e) => {
+          dispatch(setShow({ show: null }));
+        });
     }
-  }, [searchString]);
+  }, [debouncedValue]);
 
   return (
     <>
